@@ -11,9 +11,8 @@ class DecisionHandler:
     def update(self):
         if self.queue.has_items() and not self.found:
             current = self.queue.pop()
-            print(current)
             if current.position == self.maze.goal_position:
-                self.get_path(current)
+                self.show_optimal_path(current)
                 self.found = True
 
             x, y = current.position
@@ -28,12 +27,14 @@ class DecisionHandler:
     def distance_to_goal(self, position):
         return manhattan_distance(self.maze.goal_position, position)
 
-    def get_path(self, node):
-        print("DONE")
-        previous = []
+    def show_optimal_path(self, node):
+        visited = []
         while node.previous:
-            previous.append(node.previous)
+            visited.append(node.previous)
             node = node.previous
 
-        for p in previous:
-            print(p)
+        for cell in visited:
+            x,y = cell.position
+            self.maze.set_maze_cell_value(x, y, "OPTIMAL")
+
+        print(f"Path reached in {len(visited)} steps")

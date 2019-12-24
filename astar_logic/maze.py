@@ -1,7 +1,7 @@
 from graphics.grid import Grid
 from load_config import get_value
 
-CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4}
+CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4, "OPTIMAL": 5}
 
 
 class Maze:
