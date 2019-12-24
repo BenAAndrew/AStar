@@ -1,5 +1,5 @@
 from graphics.grid import Grid
-from load_config import get_value
+from tools.load_config import get_value
 from tools.vector import Vector
 
 CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4, "OPTIMAL": 5}

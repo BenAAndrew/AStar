@@ -4,7 +4,7 @@ from graphics.window import Window
 from astar_logic.maze import Maze
 from astar_logic.decision_handler import DecisionHandler
 from tools.load_maze import load_maze
-from load_config import get_value
+from tools.load_config import get_value
 
 SLEEP_TIME = 1 / get_value("Visual", "Speed")
 MAZE = load_maze("mazes/maze1.txt")
