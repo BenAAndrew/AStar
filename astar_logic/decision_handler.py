@@ -34,7 +34,7 @@ class DecisionHandler:
             node = node.previous
 
         for cell in visited:
-            x,y = cell.position
+            x, y = cell.position
             self.maze.set_maze_cell_value(x, y, "OPTIMAL")
 
         print(f"Path reached in {len(visited)} steps")

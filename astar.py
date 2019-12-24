@@ -3,16 +3,18 @@ from time import sleep
 from graphics.window import Window
 from astar_logic.maze import Maze
 from astar_logic.decision_handler import DecisionHandler
+from astar_logic.maze_loader import load_maze
 from load_config import get_value
 
 SLEEP_TIME = 1 / get_value("Visual", "Speed")
-GRID_SIZE = (5, 5)
+maze = load_maze("mazes/maze1.txt")
+width, height = maze["size"]
 
 # Initialise objects
 cell_size = get_value("Visual", "Cell_Size")
-screen = Window(GRID_SIZE[0] * cell_size, GRID_SIZE[1] * cell_size, "A* maze solving")
+screen = Window(width * cell_size, height * cell_size, "A* maze solving")
 decision_handler = DecisionHandler(
-    Maze(screen.screen, cell_size, GRID_SIZE[0], GRID_SIZE[1], [(0, 0), (2, 2), (0, 2)], (0, 1), (3, 3))
+    Maze(screen.screen, cell_size, width, height, maze["walls"], maze["start"], maze["end"])
 )
 
 # Run process
