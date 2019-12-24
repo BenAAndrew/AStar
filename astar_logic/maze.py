@@ -7,7 +7,7 @@ CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3}
 class Maze:
     def __init__(self, window, cell_size, width, height):
         self.grid = Grid(window, cell_size, get_value("Colours", "EMPTY"), width, height)
-        self.values = [[CELL_VALUES["EMPTY"] for x in range(width)] for y in range(height)]
+        self.values = [[CELL_VALUES["EMPTY"] for y in range(height)] for x in range(width)]
 
     def set_maze_cell_value(self, x, y, value):
         colour = get_value("Colours", value)

@@ -16,7 +16,7 @@ class Grid:
     def __init__(self, window, cell_size, colour, width, height):
         self.window = window
         self.cells = [
-            [Cell(x * cell_size, y * cell_size, cell_size, colour) for x in range(width)] for y in range(height)
+            [Cell(x * cell_size, y * cell_size, cell_size, colour) for y in range(height)] for x in range(width)
         ]
 
     def set_cell_colour(self, x, y, colour):
