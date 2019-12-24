@@ -7,14 +7,14 @@ from tools.load_maze import load_maze
 from load_config import get_value
 
 SLEEP_TIME = 1 / get_value("Visual", "Speed")
-maze = load_maze("mazes/maze1.txt")
-width, height = maze["size"].get_values()
+MAZE = load_maze("mazes/maze1.txt")
+WIDTH, HEIGHT = MAZE["size"].get_values()
+CELL_SIZE = int(min(get_value("Visual", "Width"), get_value("Visual", "Height")) / max(WIDTH, HEIGHT))
 
 # Initialise objects
-cell_size = get_value("Visual", "Cell_Size")
-screen = Window(width * cell_size, height * cell_size, "A* maze solving")
+screen = Window(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE, "A* maze solving")
 decision_handler = DecisionHandler(
-    Maze(screen.screen, cell_size, width, height, maze["walls"], maze["start"], maze["end"])
+    Maze(screen.screen, CELL_SIZE, WIDTH, HEIGHT, MAZE["walls"], MAZE["start"], MAZE["end"])
 )
 
 # Run process
