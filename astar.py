@@ -11,6 +11,7 @@ GRID_SIZE = (3, 3)
 cell_size = get_value("Visual", "Cell_Size")
 screen = Window(GRID_SIZE[0] * cell_size, GRID_SIZE[1] * cell_size, "A* maze solving")
 maze = Maze(screen.screen, cell_size, GRID_SIZE[0], GRID_SIZE[1])
+maze.set_maze_cell_value(0, 0, "WALL")
 
 # Run process
 while True:
