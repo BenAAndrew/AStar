@@ -2,7 +2,7 @@ import os
 
 
 def get_coordinate(line):
-    return [int(num) for num in line.split(",")]
+    return tuple([int(num) for num in line.split(",")])
 
 
 def load_maze(filename):

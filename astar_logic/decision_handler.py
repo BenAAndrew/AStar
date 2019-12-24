@@ -1,5 +1,6 @@
 from astar_logic.maze import Maze
-from astar_logic.components import Node, PriorityQueue, manhattan_distance
+from astar_logic.components import Node, PriorityQueue
+from tools.tools import manhattan_distance
 
 
 class DecisionHandler:
