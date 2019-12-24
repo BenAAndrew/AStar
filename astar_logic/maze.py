@@ -22,3 +22,10 @@ class Maze:
         colour = get_value("Colours", value)
         self.grid.set_cell_colour(x, y, colour)
         self.values[x][y] = CELL_VALUES[value]
+
+    def set_player_position(self, position):
+        # Set old position to empty
+        self.set_maze_cell_value(self.player_position[0], self.player_position[1], "EMPTY")
+        # Set new position
+        self.player_position = position
+        self.set_maze_cell_value(self.player_position[0], self.player_position[1], "PLAYER")
