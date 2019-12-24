@@ -1,7 +1,7 @@
 import configparser
 
 FILENAME = "astar.ini"
-SECTIONS = {"Visual": ["Width", "Speed"], "Colours": ["EMPTY", "WALL"]}
+SECTIONS = {"Visual": ["Size", "Speed"], "Colours": ["EMPTY", "WALL"]}
 
 # Load Config
 config = configparser.ConfigParser()

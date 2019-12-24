@@ -9,7 +9,7 @@ from load_config import get_value
 SLEEP_TIME = 1 / get_value("Visual", "Speed")
 MAZE = load_maze("mazes/maze1.txt")
 WIDTH, HEIGHT = MAZE["size"].get_values()
-CELL_SIZE = int(min(get_value("Visual", "Width"), get_value("Visual", "Height")) / max(WIDTH, HEIGHT))
+CELL_SIZE = int(get_value("Visual", "Size") / max(WIDTH, HEIGHT))
 
 # Initialise objects
 screen = Window(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE, "A* maze solving")
