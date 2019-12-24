@@ -8,11 +8,8 @@ class Window:
         self.screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption(title)
 
-    def update(self, grid):
+    def update(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
-
-        grid.draw()
-
         pygame.display.update()
