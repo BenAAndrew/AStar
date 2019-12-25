@@ -18,6 +18,7 @@ class Maze:
 
         self.set_maze_cell_value(player_position, "PLAYER")
         self.player_position = player_position
+        self.player_path = []
 
         self.set_maze_cell_value(goal_position, "GOAL")
         self.goal_position = goal_position
@@ -45,9 +46,14 @@ class Maze:
     def set_player_position(self, node: Node):
         # Set old position to empty
         self.set_maze_cell_value(self.player_position, "VISITED")
+        # Reset old path
+        for cell in self.player_path:
+            self.set_maze_cell_value(cell, "VISITED")
+
         # Set new position
         self.player_position = node.position
         self.set_maze_cell_value(self.player_position, "PLAYER")
         # Set current path
-        for cell in node.get_all_previous_nodes():
-            self.set_maze_cell_value(cell.position, "CURRENT_PATH")
+        self.player_path = [cell.position for cell in node.get_all_previous_nodes()]
+        for cell in self.player_path:
+            self.set_maze_cell_value(cell, "CURRENT_PATH")
