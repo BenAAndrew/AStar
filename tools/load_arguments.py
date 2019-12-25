@@ -6,7 +6,7 @@ config = None
 
 # Config constants
 FILENAME = "astar.ini"
-SECTIONS = {"Visual": ["Size", "Speed"], "Colours": ["EMPTY", "WALL"]}
+SECTIONS = {"Visual": ["Size", "Speed"], "Colours": ["EMPTY", "WALL", "PLAYER", "GOAL", "VISITED", "OPTIMAL"]}
 
 
 def load_arguments():
@@ -17,6 +17,9 @@ def load_arguments():
     parser.add_argument("-f", type=str, help="File name & path (i.e. mazes/maze1.txt)")
     parser.add_argument("-s", type=int, help="Screen size in pixels (i.e. 400 -> 400x400 screen)")
     arguments = vars(parser.parse_args())
+
+    # Validate non-optional command line args
+    assert "f" in arguments, "No maze file path given (i.e. python astar.py -f mazes/maze1.txt)"
 
     # Load config values
     config = configparser.ConfigParser()
