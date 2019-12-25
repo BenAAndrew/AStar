@@ -6,7 +6,9 @@ from tools.vector import Vector
 class DecisionHandler:
     def __init__(self, maze: Maze):
         self.maze = maze
-        self.queue = PriorityQueue([Node(maze.player_position, None, 0,  self.maze.goal_position.distance_to(maze.player_position))])
+        self.queue = PriorityQueue(
+            [Node(maze.player_position, None, 0, self.maze.goal_position.distance_to(maze.player_position))]
+        )
         self.found = False
 
     def update(self):

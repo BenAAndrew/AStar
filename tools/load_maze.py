@@ -1,6 +1,7 @@
 import os
 from tools.vector import Vector
 
+
 def get_coordinate_from_str(line):
     return Vector(tuple([int(num) for num in line.split(",")]))
 

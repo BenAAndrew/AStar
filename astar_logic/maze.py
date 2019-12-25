@@ -1,5 +1,5 @@
 from graphics.grid import Grid
-from tools.load_config import get_value
+from tools.load_arguments import get_config_value
 from tools.vector import Vector
 
 CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4, "OPTIMAL": 5}
@@ -9,7 +9,7 @@ class Maze:
     def __init__(self, window, cell_size, width, height, wall_cells, player_position, goal_position):
         self.width = width
         self.height = height
-        self.grid = Grid(window, cell_size, get_value("Colours", "EMPTY"), width, height)
+        self.grid = Grid(window, cell_size, get_config_value("Colours", "EMPTY"), width, height)
         self.values = [[CELL_VALUES["EMPTY"] for y in range(height)] for x in range(width)]
 
         for cell in wall_cells:
@@ -22,7 +22,7 @@ class Maze:
         self.goal_position = goal_position
 
     def set_maze_cell_value(self, position: Vector, value):
-        colour = get_value("Colours", value)
+        colour = get_config_value("Colours", value)
         self.grid.set_cell_colour(position.x, position.y, colour)
         self.values[position.x][position.y] = CELL_VALUES[value]
 

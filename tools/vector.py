@@ -13,4 +13,4 @@ class Vector:
         return self.x == vector.x and self.y == vector.y
 
     def distance_to(self, vector):
-         return int(abs(self.x - vector.x) + abs(self.y - vector.y))
+        return int(abs(self.x - vector.x) + abs(self.y - vector.y))
