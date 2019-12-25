@@ -15,10 +15,10 @@ class DecisionHandler:
     def update(self):
         if self.queue.has_items() and not self.found:
             current = self.queue.pop()
+
             if current.position.equal_to(self.maze.goal_position):
                 self.show_optimal_path(current)
                 self.found = True
-
             else:
                 x, y = current.position.get_values()
                 cost = current.cost + 1
@@ -28,14 +28,10 @@ class DecisionHandler:
                         new_node = Node(cell, current, cost, self.maze.goal_position.distance_to(cell))
                         self.queue.insert(new_node)
                         self.visited_cells[cell.x][cell.y] = cost
-                        self.maze.set_player_position(current.position)
+                        self.maze.set_player_position(current)
 
     def show_optimal_path(self, node):
-        visited = [node]
-        while node.previous:
-            visited.append(node.previous)
-            node = node.previous
-
+        visited = node.get_all_previous_nodes()
         for cell in visited:
             self.maze.set_maze_cell_value(cell.position, "OPTIMAL")
 

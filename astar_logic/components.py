@@ -11,6 +11,14 @@ class Node:
     def get_score(self):
         return self.cost + self.distance
 
+    def get_all_previous_nodes(self):
+        node = self
+        nodes = []
+        while node.previous:
+            node = node.previous
+            nodes.append(node)
+        return nodes
+
 
 class PriorityQueue:
     def __init__(self, queue: [Node]):

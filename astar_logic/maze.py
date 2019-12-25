@@ -1,8 +1,9 @@
 from graphics.grid import Grid
 from tools.load_arguments import get_config_value
 from tools.vector import Vector
+from astar_logic.components import Node
 
-CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4, "OPTIMAL": 5}
+CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4, "OPTIMAL": 5, "CURRENT_PATH": 6}
 
 
 class Maze:
@@ -41,9 +42,12 @@ class Maze:
                 surrounding_cells.append(Vector(position))
         return surrounding_cells
 
-    def set_player_position(self, position):
+    def set_player_position(self, node: Node):
         # Set old position to empty
         self.set_maze_cell_value(self.player_position, "VISITED")
         # Set new position
-        self.player_position = position
+        self.player_position = node.position
         self.set_maze_cell_value(self.player_position, "PLAYER")
+        # Set current path
+        for cell in node.get_all_previous_nodes():
+            self.set_maze_cell_value(cell.position, "CURRENT_PATH")
