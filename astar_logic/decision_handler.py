@@ -19,18 +19,19 @@ class DecisionHandler:
                 self.show_optimal_path(current)
                 self.found = True
 
-            x, y = current.position.get_values()
-            cost = current.cost + 1
+            else:
+                x, y = current.position.get_values()
+                cost = current.cost + 1
 
-            for cell in self.maze.get_valid_surrounding_cells(x, y):
-                if cost < self.visited_cells[cell.x][cell.y]:
-                    new_node = Node(cell, current, cost, self.maze.goal_position.distance_to(cell))
-                    self.queue.insert(new_node)
-                    self.visited_cells[cell.x][cell.y] = cost
-                    self.maze.set_player_position(current.position)
+                for cell in self.maze.get_valid_surrounding_cells(x, y):
+                    if cost < self.visited_cells[cell.x][cell.y]:
+                        new_node = Node(cell, current, cost, self.maze.goal_position.distance_to(cell))
+                        self.queue.insert(new_node)
+                        self.visited_cells[cell.x][cell.y] = cost
+                        self.maze.set_player_position(current.position)
 
     def show_optimal_path(self, node):
-        visited = []
+        visited = [node]
         while node.previous:
             visited.append(node.previous)
             node = node.previous
