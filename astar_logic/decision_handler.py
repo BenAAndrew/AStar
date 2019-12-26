@@ -1,5 +1,5 @@
 from astar_logic.maze import Maze
-from astar_logic.components import Node, PriorityQueue
+from astar_logic.components import Node, PriorityQueue, CellType
 from tools.vector import Vector
 
 
@@ -85,6 +85,6 @@ class DecisionHandler:
         """
         visited = node.get_all_previous_nodes()
         for cell in visited:
-            self.maze.grid.set_cell(cell.position, "OPTIMAL")
+            self.maze.grid.set_cell(cell.position, CellType.OPTIMAL_PATH)
 
         print(f"Path reached in {len(visited)} steps")

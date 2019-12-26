@@ -6,7 +6,10 @@ config = None
 
 # Config constants
 FILENAME = "astar.ini"
-SECTIONS = {"Visual": ["Size", "Speed"], "Colours": ["EMPTY", "WALL", "PLAYER", "GOAL", "VISITED", "OPTIMAL"]}
+SECTIONS = {
+    "Visual": ["Size", "Speed"],
+    "Colours": ["EMPTY", "WALL", "PLAYER", "GOAL", "VISITED", "CURRENT_PATH", "OPTIMAL_PATH"],
+}
 
 
 def load_arguments():

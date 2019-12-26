@@ -2,13 +2,11 @@ from graphics.grid import Grid
 from graphics.window import Window
 from tools.load_arguments import get_config_value
 from tools.vector import Vector
-from astar_logic.components import Node
+from astar_logic.components import Node, CellType
 
 
 class Maze:
-    def __init__(
-        self, cell_size: int, width: int, height: int, walls: [Vector], player: Vector, goal: Vector
-    ):
+    def __init__(self, cell_size: int, width: int, height: int, walls: [Vector], player: Vector, goal: Vector):
         """
         Intialises the maze by setting all the cells to their correct values
         (i.e. WALL) both graphically and in code (values list)
@@ -71,15 +69,15 @@ class Maze:
             node {Node} -- Player position node
         """
         # Set old position to empty
-        self.grid.set_cell(self.player_position, "VISITED")
+        self.grid.set_cell(self.player_position, CellType.VISITED)
         # Reset old path
         for cell in self.player_path:
-            self.grid.set_cell(cell, "VISITED")
+            self.grid.set_cell(cell, CellType.VISITED)
 
         # Set new position
         self.player_position = node.position
-        self.grid.set_cell(self.player_position, "PLAYER")
+        self.grid.set_cell(self.player_position, CellType.PLAYER)
         # Set current path
         self.player_path = [cell.position for cell in node.get_all_previous_nodes()]
         for cell in self.player_path:
-            self.grid.set_cell(cell, "CURRENT_PATH")
+            self.grid.set_cell(cell, CellType.CURRENT_PATH)

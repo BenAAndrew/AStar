@@ -1,4 +1,16 @@
+from enum import Enum
+
 from tools.vector import Vector
+
+
+class CellType(Enum):
+    EMPTY = 0
+    WALL = 1
+    PLAYER = 2
+    GOAL = 3
+    VISITED = 4
+    CURRENT_PATH = 5
+    OPTIMAL_PATH = 6
 
 
 class Node:

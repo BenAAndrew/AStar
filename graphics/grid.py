@@ -1,11 +1,9 @@
 from pygame.draw import rect
+
+from astar_logic.components import CellType
 from graphics.window import Window
 from tools.vector import Vector
 from tools.load_arguments import get_config_value
-
-# Different cell types to represent what the cell is in the values array
-# Each name also corresponds to a colour in config
-CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4, "OPTIMAL": 5, "CURRENT_PATH": 6}
 
 
 class Cell:
@@ -19,11 +17,11 @@ class Cell:
         self.position = position
         self.cell_size = cell_size
         # Defaults each cell to EMPTY
-        self.colour = get_config_value("Colours", "EMPTY")
-        self.value = CELL_VALUES["EMPTY"]
+        self.colour = get_config_value("Colours", CellType.EMPTY.name)
+        self.value = CellType.EMPTY
 
     def is_wall(self):
-        return self.value == CELL_VALUES["WALL"]
+        return self.value == CellType.WALL
 
     def draw(self, window: Window):
         """
@@ -57,22 +55,22 @@ class Grid:
             [Cell(Vector((x * cell_size, y * cell_size)), cell_size) for y in range(height)] for x in range(width)
         ]
         for cell in walls:
-            self.set_cell(cell, "WALL")
-        self.set_cell(player, "PLAYER")
-        self.set_cell(goal, "GOAL")
+            self.set_cell(cell, CellType.WALL)
+        self.set_cell(player, CellType.PLAYER)
+        self.set_cell(goal, CellType.GOAL)
 
-    def set_cell(self, position: Vector, value: str):
+    def set_cell(self, position: Vector, value: CellType):
         """
         Sets a given cell to a new state.
         Updates the cell colour and value.
         
         Arguments:
             position {Vector} -- Cell position
-            value {str} -- String name of value to set
+            value {CellType} -- CellType to set
         """
         x, y = position.get_values()
-        self.cells[x][y].colour = get_config_value("Colours", value)
-        self.cells[x][y].value = CELL_VALUES[value]
+        self.cells[x][y].colour = get_config_value("Colours", value.name)
+        self.cells[x][y].value = value
 
     def draw(self, window: Window):
         """
