@@ -30,7 +30,6 @@ class Grid:
         self.set_cell(player, "PLAYER")
         self.set_cell(goal, "GOAL")
 
-
     def set_cell(self, position: Vector, value):
         x, y = position.get_values()
         self.cells[x][y].colour = get_config_value("Colours", value)

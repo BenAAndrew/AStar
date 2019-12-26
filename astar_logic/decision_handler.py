@@ -53,10 +53,8 @@ class DecisionHandler:
                 self.show_optimal_path(current)
                 self.continue_solving = False
             else:
-                x, y = current.position.get_values()
                 cost = current.cost + 1
-
-                for cell in self.maze.get_valid_surrounding_cells(x, y):
+                for cell in self.maze.get_valid_surrounding_cells(current.position):
                     if cost < self.visited_cells[cell.x][cell.y]:
                         self.add_cell_to_queue(cell, current, cost)
         else:
