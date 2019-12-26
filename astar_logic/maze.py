@@ -7,14 +7,13 @@ from astar_logic.components import Node
 
 class Maze:
     def __init__(
-        self, window: Window, cell_size: int, width: int, height: int, walls: [Vector], player: Vector, goal: Vector
+        self, cell_size: int, width: int, height: int, walls: [Vector], player: Vector, goal: Vector
     ):
         """
         Intialises the maze by setting all the cells to their correct values
         (i.e. WALL) both graphically and in code (values list)
         
         Arguments:
-            window {Window} -- pygame Window to render grid in
             cell_size {int} -- Size of each cell in pixels
             width {int} -- Maze width in cells
             height {int} -- Maze height in cells
@@ -24,7 +23,7 @@ class Maze:
         """
         self.width = width
         self.height = height
-        self.grid = Grid(window, cell_size, width, height, walls, player, goal)
+        self.grid = Grid(cell_size, width, height, walls, player, goal)
         self.player_position = player
         self.player_path = []
         self.goal_position = goal

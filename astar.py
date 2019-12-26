@@ -16,14 +16,12 @@ CELL_SIZE = int(get_screen_size() / max(WIDTH, HEIGHT))
 
 # Initialise objects
 screen = Window(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE, "A* maze solving")
-decision_handler = DecisionHandler(
-    Maze(screen.screen, CELL_SIZE, WIDTH, HEIGHT, MAZE["walls"], MAZE["start"], MAZE["end"])
-)
+decision_handler = DecisionHandler(Maze(CELL_SIZE, WIDTH, HEIGHT, MAZE["walls"], MAZE["start"], MAZE["end"]))
 
 # Run process
 while True:
     screen.update()
-    decision_handler.maze.grid.draw()
+    decision_handler.maze.grid.draw(screen)
     if decision_handler.continue_solving:
         decision_handler.update()
     sleep(SLEEP_TIME)
