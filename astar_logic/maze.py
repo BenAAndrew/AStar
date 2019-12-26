@@ -5,20 +5,13 @@ from astar_logic.components import Node
 
 
 class Maze:
-    def __init__(self, window, cell_size, width, height, wall_cells, player_position, goal_position):
+    def __init__(self, window, cell_size, width, height, walls, player, goal):
         self.width = width
         self.height = height
-        self.grid = Grid(window, cell_size, width, height)
-
-        for cell in wall_cells:
-            self.grid.set_cell(cell, "WALL")
-
-        self.grid.set_cell(player_position, "PLAYER")
-        self.player_position = player_position
+        self.grid = Grid(window, cell_size, width, height, walls, player, goal)
+        self.player_position = player
         self.player_path = []
-
-        self.grid.set_cell(goal_position, "GOAL")
-        self.goal_position = goal_position
+        self.goal_position = goal
 
     def within_bounds(self, x, y):
         return x >= 0 and x < self.width and y >= 0 and y < self.height

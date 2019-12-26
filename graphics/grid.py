@@ -20,11 +20,16 @@ class Cell:
 
 
 class Grid:
-    def __init__(self, window, cell_size, width, height):
+    def __init__(self, window, cell_size, width, height, walls, player, goal):
         self.window = window
         self.cells = [
             [Cell(Vector((x * cell_size, y * cell_size)), cell_size) for y in range(height)] for x in range(width)
         ]
+        for cell in walls:
+            self.set_cell(cell, "WALL")
+        self.set_cell(player, "PLAYER")
+        self.set_cell(goal, "GOAL")
+
 
     def set_cell(self, position: Vector, value):
         x, y = position.get_values()
