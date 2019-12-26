@@ -3,57 +3,46 @@ from tools.load_arguments import get_config_value
 from tools.vector import Vector
 from astar_logic.components import Node
 
-CELL_VALUES = {"EMPTY": 0, "WALL": 1, "PLAYER": 2, "GOAL": 3, "VISITED": 4, "OPTIMAL": 5, "CURRENT_PATH": 6}
-
 
 class Maze:
     def __init__(self, window, cell_size, width, height, wall_cells, player_position, goal_position):
         self.width = width
         self.height = height
-        self.grid = Grid(window, cell_size, get_config_value("Colours", "EMPTY"), width, height)
-        self.values = [[CELL_VALUES["EMPTY"] for y in range(height)] for x in range(width)]
+        self.grid = Grid(window, cell_size, width, height)
 
         for cell in wall_cells:
-            self.set_maze_cell_value(cell, "WALL")
+            self.grid.set_cell(cell, "WALL")
 
-        self.set_maze_cell_value(player_position, "PLAYER")
+        self.grid.set_cell(player_position, "PLAYER")
         self.player_position = player_position
         self.player_path = []
 
-        self.set_maze_cell_value(goal_position, "GOAL")
+        self.grid.set_cell(goal_position, "GOAL")
         self.goal_position = goal_position
-
-    def set_maze_cell_value(self, position: Vector, value):
-        colour = get_config_value("Colours", value)
-        self.grid.set_cell_colour(position.x, position.y, colour)
-        self.values[position.x][position.y] = CELL_VALUES[value]
 
     def within_bounds(self, x, y):
         return x >= 0 and x < self.width and y >= 0 and y < self.height
-
-    def is_wall(self, x, y):
-        return self.values[x][y] == CELL_VALUES["WALL"]
 
     def get_valid_surrounding_cells(self, x, y):
         positions = [(x - 1, y), (x + 1, y), (x, y + 1), (x, y - 1)]
         surrounding_cells = []
         for position in positions:
             x, y = position
-            if self.within_bounds(x, y) and not self.is_wall(x, y):
+            if self.within_bounds(x, y) and not self.grid.cells[x][y].is_wall():
                 surrounding_cells.append(Vector(position))
         return surrounding_cells
 
     def set_player_position(self, node: Node):
         # Set old position to empty
-        self.set_maze_cell_value(self.player_position, "VISITED")
+        self.grid.set_cell(self.player_position, "VISITED")
         # Reset old path
         for cell in self.player_path:
-            self.set_maze_cell_value(cell, "VISITED")
+            self.grid.set_cell(cell, "VISITED")
 
         # Set new position
         self.player_position = node.position
-        self.set_maze_cell_value(self.player_position, "PLAYER")
+        self.grid.set_cell(self.player_position, "PLAYER")
         # Set current path
         self.player_path = [cell.position for cell in node.get_all_previous_nodes()]
         for cell in self.player_path:
-            self.set_maze_cell_value(cell, "CURRENT_PATH")
+            self.grid.set_cell(cell, "CURRENT_PATH")

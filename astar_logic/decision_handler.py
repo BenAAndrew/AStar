@@ -87,6 +87,6 @@ class DecisionHandler:
         """
         visited = node.get_all_previous_nodes()
         for cell in visited:
-            self.maze.set_maze_cell_value(cell.position, "OPTIMAL")
+            self.maze.grid.set_cell(cell.position, "OPTIMAL")
 
         print(f"Path reached in {len(visited)} steps")
