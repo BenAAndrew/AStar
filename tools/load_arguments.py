@@ -13,11 +13,14 @@ SECTIONS = {
 
 
 def load_arguments():
+    """
+    Initialises the system configurations from the config file and arguments passed in terminal 
+    """
     global arguments, config
 
     # Load command line arguments
     parser = argparse.ArgumentParser(description="Show the A* processing and optimal path for a defined maze")
-    parser.add_argument("-f", type=str, help="File name & path (i.e. mazes/maze1.txt)")
+    parser.add_argument("f", type=str, help="File name & path (i.e. mazes/maze1.txt)")
     parser.add_argument("-s", type=int, help="Screen size in pixels (i.e. 400 -> 400x400 screen)")
     arguments = vars(parser.parse_args())
 
@@ -36,7 +39,18 @@ def load_arguments():
             assert variable in config[section], f"Value for {variable} not defined"
 
 
-def get_config_value(section, name):
+def get_config_value(section: str, name: str):
+    """
+    Gets a value from config and returns its
+    value in the appropriate datatype
+    
+    Arguments:
+        section {str} -- Config section name
+        name {str} -- Variable name
+    
+    Returns:
+        config variable
+    """
     value = config[section][name]
     if "." in value:
         return float(value)
@@ -51,7 +65,15 @@ def get_command_line_argument(name):
 
 
 def get_screen_size():
-    if "s" in arguments:
+    """
+    Screen size is defined in config but can
+    be overwritten if passed as the command line
+    variable s
+    
+    Returns:
+        {int} -- Screen size
+    """
+    if arguments["s"]:
         return arguments["s"]
     else:
         return int(config["Visual"]["Size"])
