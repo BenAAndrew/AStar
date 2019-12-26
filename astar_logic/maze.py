@@ -1,6 +1,6 @@
 from graphics.grid import Grid
 from graphics.window import Window
-from tools.load_arguments import get_config_value
+from tools.load_arguments import get_value
 from tools.vector import Vector
 from astar_logic.components import Node, CellType
 

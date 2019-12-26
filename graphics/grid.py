@@ -3,7 +3,7 @@ from pygame.draw import rect
 from astar_logic.components import CellType
 from graphics.window import Window
 from tools.vector import Vector
-from tools.load_arguments import get_config_value
+from tools.load_arguments import get_value
 
 
 class Cell:
@@ -17,7 +17,7 @@ class Cell:
         self.position = position
         self.cell_size = cell_size
         # Defaults each cell to EMPTY
-        self.colour = get_config_value("Colours", CellType.EMPTY.name)
+        self.colour = get_value("Colours", CellType.EMPTY.name)
         self.value = CellType.EMPTY
 
     def is_wall(self):
@@ -69,7 +69,7 @@ class Grid:
             value {CellType} -- CellType to set
         """
         x, y = position.get_values()
-        self.cells[x][y].colour = get_config_value("Colours", value.name)
+        self.cells[x][y].colour = get_value("Colours", value.name)
         self.cells[x][y].value = value
 
     def draw(self, window: Window):
