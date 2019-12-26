@@ -24,5 +24,6 @@ decision_handler = DecisionHandler(
 while True:
     screen.update()
     decision_handler.maze.grid.draw()
-    decision_handler.update()
+    if decision_handler.continue_solving:
+        decision_handler.update()
     sleep(SLEEP_TIME)
