@@ -12,18 +12,22 @@ class MazeCharacter(Enum):
     END = "e"
 
 
-def get_coordinate_from_str(line: str):
+def get_size(lines: [str]):
     """
-    Creates a vector for a given set of coordinates
-    in the string format "x,y"
+    Get width and height of the maze from its
+    text file definition.
     
     Arguments:
-        line {str} -- Coordinates
+        lines {[str]} -- array of lines of the file
     
     Returns:
-        {Vector} -- Vector position
+        {int}, {int} -- width and height of the maze
     """
-    return Vector(tuple([int(num) for num in line.split(",")]))
+    height = len(lines)
+    width = len(lines[0])
+    for line in lines:
+        assert len(line) == width, "Maze incorrectly defined (width must be consistent for all rows)"
+    return width, height
 
 
 def load_cells(lines: [str]):
@@ -53,6 +57,7 @@ def load_cells(lines: [str]):
                     start = position
                 elif char == MazeCharacter.END.value:
                     end = position
+
     return walls, start, end
 
 
@@ -71,9 +76,8 @@ def load_maze(filename: str):
     with open(maze_file) as f:
         lines = [line.strip() for line in f.readlines() if line != "\n"]
 
-        size = get_coordinate_from_str(lines[0])
-        width, height = size.get_values()
-        walls, start, end = load_cells(lines[1:])
+        width, height = get_size(lines)
+        walls, start, end = load_cells(lines)
         cell_size = int(get_value("Visual", "Size") / max(width, height))
 
         return Maze(cell_size, width, height, walls, start, end), width, height, cell_size

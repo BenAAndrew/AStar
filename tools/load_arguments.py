@@ -63,5 +63,6 @@ def get_value(section: str, name: str):
         else:
             return int(value)
 
+
 def get_command_line_arg(name: str):
     return arguments[name]
