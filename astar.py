@@ -10,13 +10,11 @@ load_arguments()
 
 # Get key values
 SLEEP_TIME = 1 / get_value("Visual", "Speed")
-MAZE = load_maze(get_command_line_arg("f"))
-WIDTH, HEIGHT = MAZE["size"].get_values()
-CELL_SIZE = int(get_value("Visual", "Size") / max(WIDTH, HEIGHT))
+MAZE, WIDTH, HEIGHT, CELL_SIZE = load_maze(get_command_line_arg("f"))
 
 # Initialise objects
 screen = Window(WIDTH * CELL_SIZE, HEIGHT * CELL_SIZE, "A* maze solving")
-decision_handler = DecisionHandler(Maze(CELL_SIZE, WIDTH, HEIGHT, MAZE["walls"], MAZE["start"], MAZE["end"]))
+decision_handler = DecisionHandler(MAZE)
 
 # Run process
 while True:
