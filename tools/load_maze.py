@@ -1,9 +1,15 @@
 import os
+from enum import Enum
+
 from tools.vector import Vector
 from tools.load_arguments import get_value
 from astar_logic.maze import Maze
 
-WALL_CHARACTER = "x"
+
+class MazeCharacter(Enum):
+    WALL = "x"
+    START = "s"
+    END = "e"
 
 
 def get_coordinate_from_str(line: str):
@@ -20,7 +26,7 @@ def get_coordinate_from_str(line: str):
     return Vector(tuple([int(num) for num in line.split(",")]))
 
 
-def load_walls(lines: [str]):
+def load_cells(lines: [str]):
     """
     Iterates over maze defintion to get walls
     
@@ -31,14 +37,23 @@ def load_walls(lines: [str]):
         {[Vector]} -- list of vector positions of walls
     """
     walls = []
+    start = None
+    end = None
+    key_characters = [character.value for character in MazeCharacter]
 
     for y in range(0, len(lines)):
         line = lines[y]
         for x in range(0, len(line)):
-            if line[x] == WALL_CHARACTER:
-                walls.append(Vector((x, y)))
-
-    return walls
+            char = line[x]
+            if char in key_characters:
+                position = Vector((x, y))
+                if char == MazeCharacter.WALL.value:
+                    walls.append(position)
+                elif char == MazeCharacter.START.value:
+                    start = position
+                elif char == MazeCharacter.END.value:
+                    end = position
+    return walls, start, end
 
 
 def load_maze(filename: str):
@@ -56,9 +71,9 @@ def load_maze(filename: str):
     with open(maze_file) as f:
         lines = [line.strip() for line in f.readlines() if line != "\n"]
 
-        size, start, end = (get_coordinate_from_str(line) for line in lines[:3])
+        size = get_coordinate_from_str(lines[0])
         width, height = size.get_values()
-        walls = load_walls(lines[3:])
+        walls, start, end = load_cells(lines[1:])
         cell_size = int(get_value("Visual", "Size") / max(width, height))
 
         return Maze(cell_size, width, height, walls, start, end), width, height, cell_size

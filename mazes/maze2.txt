@@ -1,8 +1,6 @@
 15,15
-0,0
-14,0
 
-oxxxxxxxxxxxxoo
+sxxxxxxxxxxxxoe
 oxoxooooooooxox
 oxoxoooxxxoxxoo
 oxoxoooxxxoxxxo
