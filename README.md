@@ -34,6 +34,7 @@ ooo
 ```
 
 Would produce the following maze;
+
 ![](maze.png)
 
 More examples can be found in the mazes folder.
