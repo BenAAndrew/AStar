@@ -22,6 +22,7 @@ def load_arguments():
     parser = argparse.ArgumentParser(description="Show the A* processing and optimal path for a defined maze")
     parser.add_argument("f", type=str, help="File name & path (i.e. mazes/maze1.txt)")
     parser.add_argument("-Size", type=int, help="Screen size in pixels (i.e. 400 -> 400x400 screen)")
+    parser.add_argument("-Speed", type=int, help="Solving speed for the maze")
     arguments = vars(parser.parse_args())
 
     # Validate non-optional command line args
