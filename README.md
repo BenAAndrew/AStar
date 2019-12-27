@@ -63,3 +63,22 @@ Would produce the following maze;
 ![](maze.png)
 
 More examples can be found in the mazes folder.
+
+---
+
+## Code Walkthrough
+
+- **Graphics**
+    - **Window:** Class for the pygame screen 
+    - **Grid:** Classes for rendering cells & the grid and storing their colours/ values
+- **AStar_Logic**
+    - **Components:** Classes used in the A* structure
+        - CellType: Enum for values representing different cell types
+        - Node: Represents discovered cell in the maze & its score
+        - PriorityQueue: Orders the nodes & prioritises them based on score
+    - **Maze:** Stores the grid & player/ goal positions
+    - **Decision_Handler:** Implements the A* decision making updating the node queue and current position
+- **Tools**
+    - **Load_Arguments:** Loads configuration from ini file and command line
+    - **Load_Maze:** Loads the maze from the given text file
+    - **Vector:** Class representing a position with helper methods
