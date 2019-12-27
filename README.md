@@ -30,6 +30,18 @@ Size & Speed can also be overwridden as arguments by adding `-Size ___` and `-Sp
 
 ---
 
+## A* Explained
+
+A* is a very well known graph traversal algorithm. 
+
+It explores the mazes empty cells, prioritising those that get the player closer to the goal.
+
+These discovered empty cells are typically called 'Nodes' and are assessed in a queue based on their score.
+
+[Here's a good video explaining this process](https://www.youtube.com/watch?v=ySN5Wnu88nE)
+
+---
+
 ## How to create your own maze
 Mazes are defined as text files with different characters representing different cells.
 
