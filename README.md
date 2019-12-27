@@ -17,6 +17,19 @@ To run the demo maze shown run;
 
 ---
 
+## Customisation
+Values for the maze program can be changed in the config file & passed as optional parameters.
+
+The properties that can be changed in `astar.ini` are;
+
+- **Size**; The size of the window in pixels
+- **Speed**; The speed the solving executes at
+- **Colours**; Colours for all the screen elements can be customised in the format `R,G,B`
+
+Size & Speed can also be overwridden as arguments by adding `-Size ___` and `-Speed ___` to the end of the `python astar.py FILE` command.
+
+---
+
 ## How to create your own maze
 Mazes are defined as text files with different characters representing different cells.
 
